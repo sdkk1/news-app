@@ -1,18 +1,30 @@
-import { StyleSheet, View } from 'react-native';
-import ListItem from './components/news';
+import { StyleSheet, View } from 'react-native'
+import ListItem from './components/news'
+import articles from './dummies/articles.json'
+
+type article = {
+  urlToImage: string;
+  title: string;
+  author: string;
+}
 
 export default function App() {
+  const items = articles.map((article: article, index: number) => {
+    return (
+      <ListItem
+        imageUrl={article.urlToImage}
+        title={article.title}
+        author={article.author}
+        key={index}
+      />
+    )
+  })
+
   return (
     <View style={styles.container}>
-      <ListItem
-        imageUrl='https://picsum.photos/id/10/200/200'
-        title='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-        eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-        minim veniam, quis nostrud exercitation'
-        author='ReactNews'
-      />
+      {items}
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -20,6 +32,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+    justifyContent: 'center'
+  }
+})
