@@ -1,6 +1,8 @@
 import { StyleSheet, SafeAreaView, FlatList, StatusBar } from 'react-native'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 import ListItem from './components/news'
-import articles from './dummies/articles.json'
+import { newsURL } from './constants/news'
 import { isAndroid } from './util/app'
 
 type article = {
@@ -14,6 +16,22 @@ type renderItem = {
 }
 
 export default function App() {
+  const [articles, setArticles] = useState([] as Array<article>)
+  useEffect(() => {
+    fetchArticles()
+  }, [])
+
+  const fetchArticles = async () => {
+    try {
+      const res = await axios.get(newsURL)
+      if (res.data.articles) {
+        setArticles(res.data.articles)
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   const renderItem = ({ item }: renderItem) => (
     <ListItem
       imageUrl={item.urlToImage}
