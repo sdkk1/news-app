@@ -1,9 +1,9 @@
 import { StyleSheet, SafeAreaView, FlatList, StatusBar } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import ListItem from './components/news'
-import { newsURL } from './constants/news'
-import { isAndroid } from './util/app'
+import ListItem from './src/components/news'
+import { newsURL } from './src/constants/news'
+import { isAndroid } from './src/util/app'
 
 type article = {
   urlToImage: string
