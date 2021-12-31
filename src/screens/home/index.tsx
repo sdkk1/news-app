@@ -4,19 +4,16 @@ import axios from 'axios'
 import ListItem from '../../components/news'
 import { newsURL } from '../../constants/news'
 import styles from './style'
+import { StackNavigationProp } from '@react-navigation/stack'
+import { RootStackParamList } from '../../types/navigation'
+import { Article, renderItem } from '../../types/article'
 
-type article = {
-  urlToImage: string
-  title: string
-  author: string
+type Props = {
+  navigation: StackNavigationProp<RootStackParamList, 'Home'>
 }
 
-type renderItem = {
-  item: article
-}
-
-const Home = () => {
-  const [articles, setArticles] = useState([] as Array<article>)
+const Home = ({navigation}: Props) => {
+  const [articles, setArticles] = useState([] as Array<Article>)
   useEffect(() => {
     fetchArticles()
   }, [])
@@ -37,6 +34,7 @@ const Home = () => {
       imageUrl={item.urlToImage}
       title={item.title}
       author={item.author}
+      onPress={() => navigation.navigate('Article', {article: item})}
     />
   )
 

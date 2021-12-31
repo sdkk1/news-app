@@ -1,16 +1,17 @@
 import React from 'react'
-import { View, Image, Text } from 'react-native'
+import { TouchableOpacity, View, Image, Text } from 'react-native'
 import styles from './style'
 
 type Props = {
-  imageUrl: string;
-  title: string;
-  author: string;
+  imageUrl: string
+  title: string
+  author: string
+  onPress: () => void
 }
 
-const ListItem = ({imageUrl, title, author}: Props) => {
+const ListItem = ({imageUrl, title, author, onPress}: Props) => {
   return (
-    <View style={styles.itemContainer}>
+    <TouchableOpacity style={styles.itemContainer} onPress={onPress}>
       <View style={styles.imageContainer}>
         <Image
           style={{width: 100, height: 100}}
@@ -25,7 +26,7 @@ const ListItem = ({imageUrl, title, author}: Props) => {
           {author}
         </Text>
       </View>
-    </View>
+    </TouchableOpacity>
   )
 }
 
