@@ -6,14 +6,14 @@ import { newsURL } from '../../constants/news'
 import styles from './style'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { RootStackParamList } from '../../types/navigation'
-import { Article, renderItem } from '../../types/article'
+import { Article, RenderItem } from '../../types/article'
 
 type Props = {
   navigation: StackNavigationProp<RootStackParamList, 'Home'>
 }
 
 const Home = ({navigation}: Props) => {
-  const [articles, setArticles] = useState([] as Array<Article>)
+  const [articles, setArticles] = useState([] as Article[])
   useEffect(() => {
     fetchArticles()
   }, [])
@@ -29,7 +29,7 @@ const Home = ({navigation}: Props) => {
     }
   }
 
-  const renderItem = ({ item }: renderItem) => (
+  const renderItem = ({ item }: RenderItem) => (
     <ListItem
       imageUrl={item.urlToImage}
       title={item.title}
