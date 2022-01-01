@@ -5,6 +5,14 @@ export type Article = {
   url: string
 }
 
-export type renderItem = {
+export type RenderItem = {
   item: Article
+}
+
+export type Clips = {
+  clips: Article[]
+}
+
+export type Clip = {
+  clip: Article
 }
