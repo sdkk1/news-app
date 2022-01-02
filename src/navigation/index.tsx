@@ -1,3 +1,4 @@
+import { Text } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { createBottomTabNavigator, BottomTabNavigationOptions } from '@react-navigation/bottom-tabs'
@@ -29,6 +30,20 @@ const ClipStack = () => {
 }
 
 const screenOptions = ({route}: BottomTabRouteProp): BottomTabNavigationOptions => ({
+  tabBarLabel: () => {
+    let tabName
+
+    switch (route.name) {
+      case 'HomeTab':
+        tabName = 'Home'
+        break
+      case 'ClipTab':
+        tabName = 'Clip'
+        break
+    }
+
+    return <Text>{tabName}</Text>
+  },
   tabBarIcon: ({size, color}) => {
     let iconName: iconName = undefined
 
