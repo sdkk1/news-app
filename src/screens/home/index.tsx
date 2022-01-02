@@ -2,6 +2,7 @@ import { SafeAreaView, FlatList } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import ListItem from '../../components/news'
+import Loading from '../../components/loading'
 import { newsURL } from '../../constants/news'
 import styles from './style'
 import { StackNavigationProp } from '@react-navigation/stack'
@@ -14,11 +15,14 @@ type Props = {
 
 const Home = ({navigation}: Props) => {
   const [articles, setArticles] = useState([] as Article[])
+  const [loading, setLoading] = useState(false)
   useEffect(() => {
     fetchArticles()
   }, [])
 
   const fetchArticles = async () => {
+    setLoading(true)
+
     try {
       const res = await axios.get(newsURL)
       if (res.data.articles) {
@@ -27,6 +31,8 @@ const Home = ({navigation}: Props) => {
     } catch (error) {
       console.log(error)
     }
+
+    setLoading(false)
   }
 
   const renderItem = ({ item }: RenderItem) => (
@@ -45,6 +51,7 @@ const Home = ({navigation}: Props) => {
         renderItem={renderItem}
         keyExtractor={(_item, index) => index.toString()}
       />
+      {loading && <Loading />}
     </SafeAreaView>
   )
 }
